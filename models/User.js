@@ -14,8 +14,8 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    savedOccasions: {
-        type: [String], //list of occasion ids
+    favorites: {
+        type: [String], //list of restaraunts ids
         required: false,
     },
 }, {collection: 'usersCollection'})

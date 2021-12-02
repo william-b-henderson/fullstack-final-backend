@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 //using free MongoDB Atlas cluster
 const url = "mongodb+srv://admin:test@webdev-final-project-oc.ccygp.mongodb.net/user-auth-db?retryWrites=true&w=majority" 
@@ -22,10 +22,10 @@ router.get('/', function(req, res) {
 app.use("/", router)
 
 const occasionRouter = require('./routes/occasion.js')
-app.use('/events', occasionRouter);
+app.use('/occasion', occasionRouter);
 
-const authRouter = require('./routes/auth.js')
-app.use('/auth', authRouter)
+// const authRouter = require('./routes/auth.js')
+// app.use('/auth', authRouter)
 
 const userRouter = require('./routes/user.js')
 app.use('/user', userRouter)

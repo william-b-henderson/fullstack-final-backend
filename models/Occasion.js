@@ -10,10 +10,6 @@ const occasionSchema = new Schema({
         type: String,
         required: true,
     }, 
-    occasion_type: {
-        type: String,
-        required: true,
-    }, 
     image_url: {
         type: String,
         required: true,
@@ -30,14 +26,19 @@ const occasionSchema = new Schema({
         type: String,
         required: true,
     }, 
+    categories: {
+        type: [String],
+        required: true,
+    },
+    transactions: {
+        type: [String],
+        required: true,
+    },
     phone: {
         type: String,
         required: true,
-    }, 
-    location: {
-        type: String,
-        required: true,
-    }, 
+    },
+
 }, {collection: 'occasionsCollections'})
 
 module.exports = mongoose.model('Occasion', occasionSchema)
