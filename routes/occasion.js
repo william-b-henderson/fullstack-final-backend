@@ -102,7 +102,7 @@ router.get("/getFavoritesList", auth, async (req, res) => {
 //get info for restaurant given id (using hashmap between names and ids)
 
 router.get("/getRestaurantDetails", auth, (req, res) => {
-		Occasion.findOne({"name": req.body.name}, (error, occasion) => {
+		Occasion.findOne({"id": req.body.id}, (error, occasion) => {
 			if (error) {
 				res.status(500).json({ status: "failure" })
 			} else {
