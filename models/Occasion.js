@@ -38,6 +38,10 @@ const occasionSchema = new Schema({
         type: String,
         required: true,
     },
+    photos: {
+        type: [String],
+        required: true,
+    },
 
 }, {collection: 'occasionsCollections'})
 
