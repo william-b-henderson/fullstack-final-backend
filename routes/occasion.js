@@ -14,10 +14,10 @@ var router = express.Router();
 // occasion db : with all saved occasions across all users
 
 const occasionToRestaurants = {
-    "date": ["Lucia's", "Eureka!", "Chez Panisse"],
-    "work": ["Ippudo", "Caffe Strada", "Berkeley Thai House"],
-    "quick bite": ["La Burrita", "Seniore's", "Top Dog"],
-    "friends": ["Artichoke Basille's Pizza", "Gypsy's Trattoria Italiana", "IB's"] 
+    "date": ["Lucia's", "Eureka!", "Chez Panisse", "Kiraku", "La Note", "Blind Tiger"],
+    "work": ["Ippudo", "Caffe Strada", "Berkeley Thai House", "Gather", "Berkeley Social Club", "Pasta Bene"],
+    "quick bite": ["La Burrita", "Seniore's", "Top Dog", "Riceful", "Seoul Hotdog", "Nom Nom Banh Mi"],
+    "friends": ["Artichoke Basille's Pizza", "Gypsy's Trattoria Italiana", "IB's", "Thai Basil", "Great China", "Vik's Chaat"] 
 }
 
 //Client ID
@@ -30,7 +30,7 @@ const occasionToRestaurants = {
 router.post("/getRestaurantBasedOnOccasion", auth, (req, res) => {
     const { occasion } = req.body;
 
-    const restaurantName = occasionToRestaurants[occasion][Math.floor(Math.random() * 3)];
+    const restaurantName = occasionToRestaurants[occasion][Math.floor(Math.random() * 6)];
     
     axios.get("https://api.yelp.com/v3/businesses/search?term=" + restaurantName + "&location=Berkeley", {
         headers: {
