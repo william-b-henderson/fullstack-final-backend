@@ -16,7 +16,7 @@ var router = express.Router();
 const occasionToRestaurants = {
     "date": ["Lucia's", "Eureka!", "Chez Panisse"],
     "work": ["Ippudo", "Caffe Strada", "Berkeley Thai House"],
-    "quick-bite": ["La Burrita", "Seniore's", "Top Dog"],
+    "quick bite": ["La Burrita", "Seniore's", "Top Dog"],
     "friends": ["Artichoke Basille's Pizza", "Gypsy's Trattoria Italiana", "IB's"] 
 }
 
