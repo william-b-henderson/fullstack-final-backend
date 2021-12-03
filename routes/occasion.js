@@ -27,7 +27,7 @@ const occasionToRestaurants = {
 //U9FWWqIQycgki0K8s0LPfh8yzKTrmAMrqMLcEaBBdwqhNyaCYfziMSGKu4B9GoS__OgvkNGedLswnMTO7ChBXhYu9dhHzf4YqvZKe4Q_1jNHTZu5RFwTFsxccnWoYXYx
 
 //route for each type that gets a random restaurant from our hardcoded list
-router.get("/getRestaurantBasedOnOccasion", auth, (req, res) => {
+router.post("/getRestaurantBasedOnOccasion", auth, (req, res) => {
     const { occasion } = req.body;
 
     const restaurantName = occasionToRestaurants[occasion][Math.floor(Math.random() * 3)];
@@ -74,8 +74,9 @@ router.get("/getRestaurantBasedOnOccasion", auth, (req, res) => {
                         id: occasion.id,
                     })
                 }
+            })
         })
-        })})
+    })
 
     
 
@@ -106,7 +107,7 @@ router.post("/addToFavorites", auth, async(req, res) => {
 
 //get favorites list for current user
 
-router.get("/getFavoritesList", auth, async (req, res) => {
+router.post("/getFavoritesList", auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         res.json(user.favorites);
