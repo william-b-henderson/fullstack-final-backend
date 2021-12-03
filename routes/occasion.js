@@ -40,29 +40,46 @@ router.get("/getRestaurantBasedOnOccasion", auth, (req, res) => {
     })
     .then(response => {
         restaurant = response.data.businesses[0];
-        const occasion = new Occasion({      
-            name: restaurant.name,
-            id: restaurant.id,
-            image_url: restaurant.image_url,
-            url: restaurant.url,
-            rating: restaurant.rating,
-            price: restaurant.price,
-            categories: restaurant.categories.map(function (currentElement) {
-                return currentElement.title;
-            }),
-            transactions: restaurant.transactions,
-            phone: restaurant.phone,
-        })
-        occasion.save((error, document) => {
-            if (error) {
-                res.json({ status: "failure" })
-            } else {
-                res.json({
-                    status: "success",
-                    id: occasion.id,
-                })
+
+        photos = [];
+
+        axios.get("https://api.yelp.com/v3/businesses/" + restaurant.id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer U9FWWqIQycgki0K8s0LPfh8yzKTrmAMrqMLcEaBBdwqhNyaCYfziMSGKu4B9GoS__OgvkNGedLswnMTO7ChBXhYu9dhHzf4YqvZKe4Q_1jNHTZu5RFwTFsxccnWoYXYx',
             }
+        }).then(response => {
+            photos = response.photos;
+
+            const occasion = new Occasion({      
+                name: restaurant.name,
+                id: restaurant.id,
+                image_url: restaurant.image_url,
+                url: restaurant.url,
+                rating: restaurant.rating,
+                price: restaurant.price,
+                categories: restaurant.categories.map(function (currentElement) {
+                    return currentElement.title;
+                }),
+                transactions: restaurant.transactions,
+                phone: restaurant.phone,
+                photos: photos,
+            })
+            occasion.save((error, document) => {
+                if (error) {
+                    res.json({ status: "failure" })
+                } else {
+                    res.json({
+                        status: "success",
+                        id: occasion.id,
+                    })
+                }
+        })
         })})
+
+    
+
+
     .catch(error => {res.send(error); })
     });
 
