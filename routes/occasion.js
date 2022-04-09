@@ -6,6 +6,7 @@ const axios = require('axios');
 const auth = require("../middleware/auth");
 
 var router = express.Router();
+require('dotenv').config();
 
 //routes TBD
 
@@ -21,10 +22,10 @@ const occasionToRestaurants = {
 }
 
 //Client ID
-//l_Qx4Bm1zznKu-A0HRU-mA
+//cXpedBEUpB7909v320QmVA
 
 //API Key
-//U9FWWqIQycgki0K8s0LPfh8yzKTrmAMrqMLcEaBBdwqhNyaCYfziMSGKu4B9GoS__OgvkNGedLswnMTO7ChBXhYu9dhHzf4YqvZKe4Q_1jNHTZu5RFwTFsxccnWoYXYx
+//N1HfeHNHmDoJzy_lC1Vc1eqXwaX9p7I91Chv-ggRGGpTR92POX1mVlJI0HauNurG2hDgz0E6q61sJmbC013czb9CHfv3m3utWISb7-T8AVxaudzul4nuLA0VG81RYnYx
 
 //route for each type that gets a random restaurant from our hardcoded list
 router.post("/getRestaurantBasedOnOccasion", auth, (req, res) => {
@@ -35,7 +36,7 @@ router.post("/getRestaurantBasedOnOccasion", auth, (req, res) => {
     axios.get("https://api.yelp.com/v3/businesses/search?term=" + restaurantName + "&location=Berkeley", {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization' : 'Bearer U9FWWqIQycgki0K8s0LPfh8yzKTrmAMrqMLcEaBBdwqhNyaCYfziMSGKu4B9GoS__OgvkNGedLswnMTO7ChBXhYu9dhHzf4YqvZKe4Q_1jNHTZu5RFwTFsxccnWoYXYx',
+          'Authorization' : `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
         }
     })
     .then(response => {
@@ -46,7 +47,7 @@ router.post("/getRestaurantBasedOnOccasion", auth, (req, res) => {
         axios.get("https://api.yelp.com/v3/businesses/" + restaurant.id, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization' : 'Bearer U9FWWqIQycgki0K8s0LPfh8yzKTrmAMrqMLcEaBBdwqhNyaCYfziMSGKu4B9GoS__OgvkNGedLswnMTO7ChBXhYu9dhHzf4YqvZKe4Q_1jNHTZu5RFwTFsxccnWoYXYx',
+                'Authorization' : `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
             }
         }).then(response => {
             photos = response.photos;

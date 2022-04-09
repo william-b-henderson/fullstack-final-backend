@@ -2,8 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 //using free MongoDB Atlas cluster
-const url = "mongodb+srv://admin:test@webdev-final-project-oc.ccygp.mongodb.net/user-auth-db?retryWrites=true&w=majority" 
+const url = `mongodb+srv://${process.env.REACT_APP_USERNAME}:${process.env.REACT_APP_PASSWORD}@${process.env.REACT_APP_DATABASE_NAME}`;
 
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true })
 
@@ -11,7 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;
+var port = process.env.REACT_APP_PORT || 8080;
 
 var router = express.Router();
 
